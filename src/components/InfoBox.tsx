@@ -12,7 +12,7 @@ import { Info } from "lucide-react";
 interface InfoBoxProps {
   title: string;
   content: string;
-  example?: any;
+  example?: React.ReactNode;
 }
 
 export function InfoBox({ title, content, example }: InfoBoxProps) {

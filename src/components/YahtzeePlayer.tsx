@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { useGameContext } from "@/context/GameContext";
 import { ScoreCard } from "@/components/ScoreCard";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function YahtzeePlayer() {
-  const { state, dispatch } = useGameContext();
+  const { state } = useGameContext();
   const [currentPlayer, setCurrentPlayer] = useState<string | null>(
     state.players.length > 0 ? state.players[0] : null
   );

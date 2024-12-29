@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { InfoBox } from "@/components/InfoBox";
@@ -239,7 +239,8 @@ interface ScoreCardProps {
 }
 
 export function ScoreCard({ playerName }: ScoreCardProps) {
-  const { state, dispatch } = useGameContext();
+  const { dispatch } = useGameContext();
+  const stableDispatch = useRef(dispatch);
 
   const [scores, setScores] = useState<{ [key: string]: number }>({});
   const [striked, setStriked] = useState<{ [key: string]: boolean }>({});
@@ -279,8 +280,11 @@ export function ScoreCard({ playerName }: ScoreCardProps) {
   const totalScore = upperScore + bonus + lowerScore;
 
   useEffect(() => {
-    dispatch({ type: "UPDATE_SCORE", payload: { playerName, totalScore } });
-  }, [totalScore]);
+    stableDispatch.current({
+      type: "UPDATE_SCORE",
+      payload: { playerName: playerName, score: totalScore },
+    });
+  }, [totalScore, playerName]);
 
   const renderScoreInput = (category: ScoreCategory) => {
     const strikeCheckbox = (
@@ -331,7 +335,7 @@ export function ScoreCard({ playerName }: ScoreCardProps) {
           }
           onChange={(e) => {
             const inputValue = parseInt(e.target.value || "0", 10);
-            if (inputValue <= category.maxValue) {
+            if (category.maxValue && inputValue <= category.maxValue) {
               updateScore(category.name, e.target.value);
             }
           }}

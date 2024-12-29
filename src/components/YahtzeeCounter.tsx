@@ -12,9 +12,9 @@ export default function YahtzeeCounter() {
     if (Object.keys(state.scores).length === 0) return null;
     const highestScore = Math.max(...Object.values(state.scores));
     const winners = Object.entries(state.scores).filter(
-      ([_, score]) => score === highestScore
+      ([, score]) => score === highestScore
     );
-    return winners.map(([name, _]) => name).join(", ");
+    return winners.map(([name]) => name).join(", ");
   };
 
   return (
