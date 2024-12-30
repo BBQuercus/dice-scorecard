@@ -5,7 +5,7 @@ import { useGameContext } from "@/context/GameContext";
 import { ScoreCard } from "@/components/ScoreCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default function YahtzeePlayer() {
+export default function PlayingScreen() {
   const { state } = useGameContext();
   const [currentPlayer, setCurrentPlayer] = useState<string | null>(
     state.players.length > 0 ? state.players[0] : null
@@ -33,7 +33,11 @@ export default function YahtzeePlayer() {
 
       {currentPlayer && (
         <div>
-          <ScoreCard key={currentPlayer} playerName={currentPlayer} />
+          <ScoreCard
+            key={currentPlayer}
+            playerName={currentPlayer}
+            isYahtzee={state.yathzee}
+          />
         </div>
       )}
     </>

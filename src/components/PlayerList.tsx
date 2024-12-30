@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,26 +37,8 @@ export function PlayerList() {
   };
 
   return (
-    <div className="py-2">
+    <div className="my-4 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-2">Players</h2>
-      <div className="flex flex-wrap gap-2 mb-2">
-        {state.players.map((player, index) => (
-          <div
-            key={index}
-            className="flex items-center bg-primary text-primary-foreground rounded-full px-3 py-1"
-          >
-            <span>{player}</span>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="ml-2 p-0"
-              onClick={() => removePlayer(index)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        ))}
-      </div>
       <div className="flex gap-2">
         <Input
           type="text"
@@ -69,6 +53,18 @@ export function PlayerList() {
         <Button onClick={addPlayer}>
           <PlusCircle className="mr-2 h-4 w-4" /> Add Player
         </Button>
+      </div>
+      <div className="flex flex-wrap gap-2 mt-2">
+        {state.players.map((player, index) => (
+          <Button
+            key={index}
+            className="p-0 mr-2 flex items-center bg-primary text-primary-foreground rounded-md px-3 py-1 gap-2"
+            onClick={() => removePlayer(index)}
+          >
+            <X className="h-4 w-4" />
+            <span>{player}</span>
+          </Button>
+        ))}
       </div>
     </div>
   );

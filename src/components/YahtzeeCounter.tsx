@@ -1,50 +1,41 @@
+"use client";
+
 import React from "react";
-import YahtzeePlayer from "@/components/YahtzeePlayer";
+import PlayingScreen from "@/components/PlayingScreen";
 import { useGameContext } from "@/context/GameContext";
 import { PlayerList } from "@/components/PlayerList";
 import { Button } from "@/components/ui/button";
-import { RoundTracker } from "./RoundTracker";
+import { RoundTracker } from "@/components/RoundTracker";
+import WinningScreen from "./WinningScreen";
+import GameSelector from "./GameSelector";
 
 export default function YahtzeeCounter() {
   const { state, dispatch } = useGameContext();
 
-  const getWinner = () => {
-    if (Object.keys(state.scores).length === 0) return null;
-    const highestScore = Math.max(...Object.values(state.scores));
-    const winners = Object.entries(state.scores).filter(
-      ([, score]) => score === highestScore
-    );
-    return winners.map(([name]) => name).join(", ");
+  const startGame = () => {
+    if (state.players.length < 1) {
+      alert("Add a player first :)");
+      return;
+    }
+    dispatch({ type: "START_GAME" });
   };
 
   return (
     <>
       {!state.gameStarted && (
         <>
+          <GameSelector />
           <PlayerList />
-          <Button
-            onClick={() =>
-              dispatch({ type: "SET_GAME_STARTED", payload: true })
-            }
-          >
-            Start Game
-          </Button>
+          <Button onClick={startGame}>Start Game</Button>
         </>
       )}
-      {state.gameStarted && (
+      {state.gameStarted && !state.winningScreen && (
         <>
-          <YahtzeePlayer />
+          <PlayingScreen />
           <RoundTracker />
         </>
       )}
-      {state.currentRound > 1 && (
-        <div className="mt-6 p-4 bg-primary text-primary-foreground rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Current Standing</h2>
-          <p>Round: {state.currentRound - 1}</p>
-          <p>Leader: {getWinner()}</p>
-          <p>Winning Score: {Math.max(...Object.values(state.scores), 0)}</p>
-        </div>
-      )}
+      {state.winningScreen && <WinningScreen />}
     </>
   );
 }
