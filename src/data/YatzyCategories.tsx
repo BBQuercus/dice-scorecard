@@ -1,5 +1,5 @@
 import { Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from "lucide-react";
-import { ScoreCategory } from "./YahtzeeCategories";
+import { ScoreCategory } from "@/data/ScoreCategory";
 
 export const upperScoreCategories: ScoreCategory[] = [
   {

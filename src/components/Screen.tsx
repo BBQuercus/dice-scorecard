@@ -6,10 +6,11 @@ import { useGameContext } from "@/context/GameContext";
 import { PlayerList } from "@/components/PlayerList";
 import { Button } from "@/components/ui/button";
 import { RoundTracker } from "@/components/RoundTracker";
-import WinningScreen from "./WinningScreen";
-import GameSelector from "./GameSelector";
+import WinningScreen from "@/components/WinningScreen";
+import GameSelector from "@/components/GameSelector";
+import GeneralInfo from "./GeneralInfo";
 
-export default function YahtzeeCounter() {
+export default function Screen() {
   const { state, dispatch } = useGameContext();
 
   const startGame = () => {
@@ -26,7 +27,13 @@ export default function YahtzeeCounter() {
         <>
           <GameSelector />
           <PlayerList />
-          <Button onClick={startGame}>Start Game</Button>
+          <Button
+            className={state.yathzee ? "bg-rose-700" : "bg-indigo-800"}
+            onClick={startGame}
+          >
+            Start Game
+          </Button>
+          <GeneralInfo />
         </>
       )}
       {state.gameStarted && !state.winningScreen && (

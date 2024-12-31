@@ -8,14 +8,12 @@ export default function GameSelector() {
   const { state, dispatch } = useGameContext();
 
   const gameInfo = {
-    yahtzee:
-      "Yahtzee is played with 5 dice and has 13 rounds. It includes a bonus for scoring 63 or more points in the upper section.",
-    yatzy:
-      "Yatzy is played with 5 dice and has 15 rounds. It does not have an upper section bonus, but includes additional scoring categories.",
+    yahtzee: "Yahtzee is played with 5 dice and has 13 rounds.",
+    yatzy: "Yatzy is played with 5 dice and has 15 rounds.",
   };
 
   const difference =
-    "The main difference is that Yatzy has two additional scoring categories (Chance and Yatzy) and no upper section bonus, while Yahtzee has a bonus for the upper section.";
+    "Yahtzee rules and scoring categories are somewhat different from Yatzy. For example, Yahtzee does not have the One Pair and Two Pairs categories. There are also scoring differences for Three / Four of a Kind, Full House, what Small and Large Straights are and Yahtzee bonuses.";
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -25,6 +23,7 @@ export default function GameSelector() {
         </Label>
         <Switch
           id="game-toggle"
+          className="data-[state=checked]:bg-rose-800 data-[state=unchecked]:bg-indigo-800"
           checked={state.yathzee}
           onCheckedChange={() => dispatch({ type: "TOGGLE_GAME" })}
         />

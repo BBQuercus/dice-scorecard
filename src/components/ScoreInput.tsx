@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Toggle } from "@/components/ui/toggle";
 import { CircleSlash } from "lucide-react";
-import { ScoreCategory } from "@/data/YahtzeeCategories";
+import { ScoreCategory } from "@/data/ScoreCategory";
 import { useGameContext } from "@/context/GameContext";
 import { useScoreCategories } from "@/hooks/useScoreCategories";
 
@@ -84,18 +84,28 @@ export function ScoreInput({ playerName, category }: ScoreInputProps) {
   if (category.isCheckbox) {
     return (
       <div className="flex items-center justify-center h-8 gap-2">
-        <Checkbox
-          id={category.name}
-          disabled={state.strikes[playerName]?.[category.name] === true}
-          checked={state.scores[playerName]?.[category.name] > 0}
-          onCheckedChange={(checked) => updateScore(category.name, checked)}
-        />
-        <label
-          htmlFor={category.name}
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        <div
+          className="flex items-center gap-2 p-2 cursor-pointer hover:bg-gray-100 rounded"
+          onClick={() => {
+            if (!state.strikes[playerName]?.[category.name]) {
+              updateScore(
+                category.name,
+                !state.scores[playerName]?.[category.name]
+              );
+            }
+          }}
         >
-          Scored
-        </label>
+          <Checkbox
+            id={category.name}
+            disabled={state.strikes[playerName]?.[category.name] === true}
+            checked={state.scores[playerName]?.[category.name] > 0}
+            className="pointer-events-none"
+          />
+          {/* Somehow labels don't allow for clicking... */}
+          <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Scored
+          </p>
+        </div>
         <StrikeCheckbox
           striked={state.strikes[playerName]?.[category.name]}
           toggleStriked={() => toggleStriked(category.name)}

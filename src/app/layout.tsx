@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dice score card",
+  title: "Dice Score Card - Play Yahtzee/Yatzy with Ease",
   description: "Score card for playing Yahtzee / Yatzy",
+  keywords:
+    "dice score card, Yahtzee, Yatzy, score tracker, board games, family games, multiplayer games",
+  authors: [{ name: "Bastian Eichenberger", url: "bastianeichenberger.ch" }],
 };
 
 export default function RootLayout({

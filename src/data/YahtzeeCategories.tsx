@@ -1,14 +1,5 @@
 import { Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from "lucide-react";
-
-export interface ScoreCategory {
-  name: string;
-  description: string;
-  isCheckbox?: boolean;
-  stepValue?: number;
-  maxValue?: number;
-  value?: number;
-  example?: React.ReactNode;
-}
+import { ScoreCategory } from "@/data/ScoreCategory";
 
 export const upperScoreCategories: ScoreCategory[] = [
   {

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { GameProvider } from "@/context/GameContext";
-import YahtzeeCounter from "@/components/YahtzeeCounter";
+import Screen from "@/components/Screen";
 import Logo from "@/components/Logo";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
     <div className="container mx-auto px-4 py-8 max-w-md">
       <GameProvider>
         <Logo />
-        <YahtzeeCounter />
+        <Screen />
       </GameProvider>
     </div>
   );
